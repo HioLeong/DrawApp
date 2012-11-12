@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Built-By: Michael
+Build-Jdk: 1.7.0_09
+Main-Class: comp2013.hleong.drawapp.DrawApp
+Created-By: Maven Integration for Eclipse
+
