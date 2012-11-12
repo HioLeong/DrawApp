@@ -1,5 +1,8 @@
 package comp2013.hleong.drawapp;
 
+import java.io.Reader;
+import java.io.StringReader;
+
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -9,12 +12,16 @@ public class DrawApp extends Application {
 
 	private void init(Stage primaryStage) {
 		Group root = new Group();
-		primaryStage.setResizable(true);
-		primaryStage.setScene(new Scene(root, 500, 500));
+		primaryStage.setResizable(false);
+		primaryStage.setScene(new Scene(root));
 
-		ImagePanel imagePanel = new ImagePanel(500, 300);
-		imagePanel.drawLine(0, 0, 150, 150);
-		root.getChildren().add(imagePanel);
+		MainWindow mainWindow = new MainWindow();
+		root.getChildren().add(mainWindow);
+		
+		Reader reader = new StringReader("DL 150 0 150 0");
+		JavaFxParser parser = new JavaFxParser(reader, mainWindow.getImagePanel());
+		parser.parse();
+
 
 	}
 

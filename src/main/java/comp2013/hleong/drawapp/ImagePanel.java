@@ -10,6 +10,7 @@ public class ImagePanel extends Pane {
 	private Group root = new Group();
 	
 	public ImagePanel(double height, double width) {
+		this.setPrefSize(height, width);
 		this.setHeight(height);
 		this.setWidth(width);
 		this.getChildren().add(root);
