@@ -44,6 +44,12 @@ public class JavaFxParser {
 		if (command.equals("DR")) {
 			drawRect(line.substring(2, line.length()));
 		}
+		if (command.equals("DA")) {
+			drawArc(line.substring(2, line.length()));
+		}
+		if (command.equals("DO")) {
+			drawOval(line.substring(2, line.length()));
+		}
 
 	}
 
@@ -73,33 +79,45 @@ public class JavaFxParser {
 		y1 = getInteger(tokenizer);
 		x2 = getInteger(tokenizer);
 		y2 = getInteger(tokenizer);
-		
+
 		imagePanel.drawRect(x1, y1, x2, y2);
-		
+
 	}
 
 	public void drawArc(String args) throws ParseException {
-	    int x = 0;
-	    int y = 0;
-	    int width = 0;
-	    int height = 0;
-	    int startAngle = 0;
-	    int arcAngle = 0;
-	    
-	    StringTokenizer tokenizer = new StringTokenizer(args);
-	    x = getInteger(tokenizer);
-	    y = getInteger(tokenizer);
-	    width = getInteger(tokenizer);
-	    height = getInteger(tokenizer);
-	    startAngle = getInteger(tokenizer);
-	    arcAngle = getInteger(tokenizer);
-	    imagePanel.drawArc();
+		int centerX = 0;
+		int centerY = 0;
+		int radiusX = 0;
+		int radiusY = 0;
+		int startAngle = 0;
+		int length = 0;
 
+		StringTokenizer tokenizer = new StringTokenizer(args);
+		centerX = getInteger(tokenizer);
+		centerY = getInteger(tokenizer);
+		radiusX = getInteger(tokenizer);
+		radiusY = getInteger(tokenizer);
+		startAngle = getInteger(tokenizer);
+		length = getInteger(tokenizer);
+
+		imagePanel.drawArc(centerX, centerY, radiusX, radiusY, startAngle,
+				length);
 	}
 
 	public void drawOval(String args) throws ParseException {
-		// TODO Auto-generated method stub
+		
+		int centerX = 0;
+		int centerY = 0;
+		int radiusX = 0;
+		int radiusY = 0;
 
+		StringTokenizer tokenizer = new StringTokenizer(args);
+		centerX = getInteger(tokenizer);
+		centerY = getInteger(tokenizer);
+		radiusX = getInteger(tokenizer);
+		radiusY = getInteger(tokenizer);
+		
+		imagePanel.drawOval(centerX, centerY, radiusX, radiusY);
 	}
 
 	public void drawString(String args) throws ParseException {
@@ -116,6 +134,7 @@ public class JavaFxParser {
 		if (tokenizer.hasMoreElements()) {
 			return Integer.parseInt(tokenizer.nextToken());
 		} else {
+			label.setText("Missing Integer value");
 			throw new ParseException("Missing Integer value");
 		}
 	}

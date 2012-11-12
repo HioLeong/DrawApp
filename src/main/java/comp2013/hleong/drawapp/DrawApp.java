@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 public class DrawApp extends Application {
 
-	public final static String TEST_PARSE = "DR 10 10 150 150\nDL 10 10 160 160\nDL 10 160 160 10";
+	public final static String TEST_PARSE = "DO 150 150 1 1";
 
 	private void init(Stage primaryStage) {
 		Group root = new Group();
