@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 
 public class DrawApp extends Application {
 
+	public final static String TEST_PARSE = "DR 10 10 150 150\nDL 10 10 160 160\nDL 10 160 160 10";
+
 	private void init(Stage primaryStage) {
 		Group root = new Group();
 		primaryStage.setResizable(false);
@@ -17,11 +19,10 @@ public class DrawApp extends Application {
 
 		MainWindow mainWindow = new MainWindow();
 		root.getChildren().add(mainWindow);
-		
-		Reader reader = new StringReader("DL 150 0 150 0");
-		JavaFxParser parser = new JavaFxParser(reader, mainWindow.getImagePanel());
+		Reader reader = new StringReader(TEST_PARSE);
+		JavaFxParser parser = new JavaFxParser(reader, mainWindow.getLabel(),
+				mainWindow.getImagePanel());
 		parser.parse();
-
 
 	}
 

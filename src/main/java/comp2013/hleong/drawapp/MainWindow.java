@@ -22,12 +22,15 @@ public class MainWindow extends VBox {
 
 	public MainWindow(double width, double height) {
 		imagePanel = new ImagePanel(width, height);
+		
 		label = new Label();
 		label.setPrefSize(width, height / 2);
+		
 		buttonBox = new HBox();
 		buttonBox.getChildren().add(
 				ButtonBuilder.create().text("Close").build());
 		buttonBox.setPadding(new Insets(10,10,10,10));
+		
 		buildGUI();
 	}
 
@@ -51,6 +54,10 @@ public class MainWindow extends VBox {
 
 	public ImagePanel getImagePanel() {
 		return imagePanel;
+	}
+	
+	public Label getLabel() {
+		return label;
 	}
 
 }
