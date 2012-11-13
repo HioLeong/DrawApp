@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 public class DrawApp extends Application {
 
-	public final static String TEST_PARSE = "DS 150 150 What PENIS";
+	public final static String TEST_PARSE = "SC blue\nDL 0 0 150 150\nDR 150 150 50 50\nDR 0 0 150 150";
 
 	private void init(Stage primaryStage) {
 		Group root = new Group();
@@ -19,6 +19,7 @@ public class DrawApp extends Application {
 
 		MainWindow mainWindow = new MainWindow();
 		root.getChildren().add(mainWindow);
+//		Reader reader = new InputStreamReader(System.in);
 		Reader reader = new StringReader(TEST_PARSE);
 		JavaFxParser parser = new JavaFxParser(reader, mainWindow.getLabel(),
 				mainWindow.getImagePanel());
@@ -26,18 +27,9 @@ public class DrawApp extends Application {
 
 	}
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		launch();
-		/*
-		 * Reader reader = new InputStreamReader(System.in); BufferedReader
-		 * bReader = new BufferedReader(reader); try { String line =
-		 * bReader.readLine(); System.out.println("Java");
-		 * System.out.println(line); } catch (IOException e) { // TODO
-		 * Auto-generated catch block e.printStackTrace(); }
-		 */
+
 	}
 
 	@Override

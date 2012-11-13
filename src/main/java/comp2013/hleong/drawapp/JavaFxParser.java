@@ -6,6 +6,7 @@ import java.io.Reader;
 import java.util.StringTokenizer;
 
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 
 public class JavaFxParser {
 
@@ -44,6 +45,9 @@ public class JavaFxParser {
 		if (command.equals("DR")) {
 			drawRect(line.substring(2, line.length()));
 		}
+		if (command.equals("FR")) {
+
+		}
 		if (command.equals("DA")) {
 			drawArc(line.substring(2, line.length()));
 		}
@@ -52,6 +56,9 @@ public class JavaFxParser {
 		}
 		if (command.equals("DS")) {
 			drawString(line.substring(2, line.length()));
+		}
+		if (command.equals("SC")) {
+			setColour(line.substring(3, line.length()));
 		}
 
 	}
@@ -85,6 +92,21 @@ public class JavaFxParser {
 
 		imagePanel.drawRect(x1, y1, x2, y2);
 
+	}
+
+	public void fillRect(String args) throws ParseException {
+		int x1 = 0;
+		int y1 = 0;
+		int x2 = 0;
+		int y2 = 0;
+
+		StringTokenizer tokenizer = new StringTokenizer(args);
+		x1 = getInteger(tokenizer);
+		y1 = getInteger(tokenizer);
+		x2 = getInteger(tokenizer);
+		y2 = getInteger(tokenizer);
+
+		imagePanel.drawRect(x1, y1, x2, y2);
 	}
 
 	public void drawArc(String args) throws ParseException {
@@ -124,20 +146,62 @@ public class JavaFxParser {
 	}
 
 	public void drawString(String args) throws ParseException {
+
 		int x = 0;
 		int y = 0;
 		String s = "";
+
 		StringTokenizer tokenizer = new StringTokenizer(args);
 		x = getInteger(tokenizer);
 		y = getInteger(tokenizer);
 		s = s.concat(getString(tokenizer));
-		
+
 		imagePanel.drawString(x, y, s);
 
 	}
 
 	public void setColour(String colourName) throws ParseException {
-		// TODO Auto-generated method stub
+
+		if (colourName.equals("black")) {
+			imagePanel.setColor(Color.BLACK);
+		}
+		if (colourName.equals("blue")) {
+			imagePanel.setColor(Color.BLUE);
+		}
+		if (colourName.equals("cyan")) {
+			imagePanel.setColor(Color.CYAN);
+		}
+		if (colourName.equals("darkgrey")) {
+			imagePanel.setColor(Color.DARKGREY);
+		}
+		if (colourName.equals("grey")) {
+			imagePanel.setColor(Color.GREY);
+		}
+		if (colourName.equals("green")) {
+			imagePanel.setColor(Color.GREEN);
+		}
+		if (colourName.equals("lightgray")) {
+			imagePanel.setColor(Color.LIGHTGREY);
+		}
+		if (colourName.equals("magenta")) {
+			imagePanel.setColor(Color.MAGENTA);
+		}
+		if (colourName.equals("orange")) {
+			imagePanel.setColor(Color.ORANGE);
+		}
+		if (colourName.equals("pink")) {
+			imagePanel.setColor(Color.PINK);
+		}
+		if (colourName.equals("red")) {
+			imagePanel.setColor(Color.RED);
+		}
+		if (colourName.equals("white")) {
+			imagePanel.setColor(Color.WHITE);
+		}
+		if (colourName.equals("yellow")) {
+			imagePanel.setColor(Color.YELLOW);
+		}
+		// throw new ParseException("Invalid colour name");
 
 	}
 
@@ -149,7 +213,7 @@ public class JavaFxParser {
 			throw new ParseException("Missing Integer value");
 		}
 	}
-	
+
 	public String getString(StringTokenizer tokenizer) throws ParseException {
 		String s = "";
 		if (tokenizer.hasMoreElements()) {

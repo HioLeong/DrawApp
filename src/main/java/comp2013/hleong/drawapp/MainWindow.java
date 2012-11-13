@@ -1,5 +1,8 @@
 package comp2013.hleong.drawapp;
 
+import javafx.application.Platform;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.ButtonBuilder;
@@ -22,15 +25,23 @@ public class MainWindow extends VBox {
 
 	public MainWindow(double width, double height) {
 		imagePanel = new ImagePanel(width, height);
-		
+
 		label = new Label();
 		label.setPrefSize(width, height / 2);
-		
+
 		buttonBox = new HBox();
 		buttonBox.getChildren().add(
-				ButtonBuilder.create().text("Close").build());
-		buttonBox.setPadding(new Insets(10,10,10,10));
-		
+				ButtonBuilder.create().text("Close")
+						.onAction(new EventHandler() {
+
+							@Override
+							public void handle(Event arg0) {
+								Platform.exit();
+							}
+
+						}).build());
+		buttonBox.setPadding(new Insets(10, 10, 10, 10));
+
 		buildGUI();
 	}
 
@@ -45,7 +56,7 @@ public class MainWindow extends VBox {
 		label.setStyle("-fx-padding: 10px");
 		label.setAlignment(Pos.TOP_LEFT);
 		getChildren().add(label);
-		
+
 		buttonBox.setAlignment(Pos.CENTER);
 		buttonBox.setStyle("-fx-border-color: grey");
 		getChildren().add(buttonBox);
@@ -55,7 +66,7 @@ public class MainWindow extends VBox {
 	public ImagePanel getImagePanel() {
 		return imagePanel;
 	}
-	
+
 	public Label getLabel() {
 		return label;
 	}
