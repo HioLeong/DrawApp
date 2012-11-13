@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 public class DrawApp extends Application {
 
-	public final static String TEST_PARSE = "SC blue\nFR 0 0 150 150";
+	public final static String TEST_PARSE = "SC blue\nFR 0 0 150 150\nSC black\nFR 150 150 150 150\nDL 0";
 
 	private void init(Stage primaryStage) {
 		Group root = new Group();
@@ -23,7 +23,11 @@ public class DrawApp extends Application {
 		Reader reader = new StringReader(TEST_PARSE);
 		JavaFxParser parser = new JavaFxParser(reader, mainWindow.getLabel(),
 				mainWindow.getImagePanel());
-		parser.parse();
+		
+		mainWindow.getNextStepButton().setOnAction(parser);
+//		parser.parse();
+		
+		
 
 	}
 

@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBuilder;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -18,6 +19,7 @@ public class MainWindow extends VBox {
 	private ImagePanel imagePanel;
 	private Label label;
 	private HBox buttonBox;
+	private Button nextStep;
 
 	public MainWindow() {
 		this(DEFAULT_WIDTH, DEFAULT_HEIGHT);
@@ -30,20 +32,23 @@ public class MainWindow extends VBox {
 		label.setPrefSize(width, height / 2);
 
 		buttonBox = new HBox();
+		
 		buttonBox.getChildren().add(
 				ButtonBuilder.create().text("Close")
 						.onAction(new EventHandler<ActionEvent>() {
 
 							@Override
 							public void handle(ActionEvent arg0) {
-								// TODO Auto-generated method stub
 								Platform.exit();
-
 							}
 
 						}).build());
+		
+		nextStep = new Button();
+		nextStep.setText("Next Step");
+		
+		buttonBox.getChildren().add(nextStep);
 		buttonBox.setPadding(new Insets(10, 10, 10, 10));
-
 		buildGUI();
 	}
 
@@ -71,6 +76,10 @@ public class MainWindow extends VBox {
 
 	public Label getLabel() {
 		return label;
+	}
+	
+	public Button getNextStepButton() {
+		return nextStep;
 	}
 
 }

@@ -5,10 +5,12 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.StringTokenizer;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 
-public class JavaFxParser {
+public class JavaFxParser implements EventHandler<ActionEvent> {
 
 	private BufferedReader reader;
 	private ImagePanel imagePanel;
@@ -27,12 +29,28 @@ public class JavaFxParser {
 				parseLine(line);
 				line = reader.readLine();
 			}
+			label.setText("Drawing Complete");
 		} catch (IOException e) {
 			label.setText("IO Exception");
 		} catch (ParseException e) {
 			label.setText("Parse Exception");
 		}
-		label.setText("Drawing Complete");
+	}
+
+	public void singleStepParse() {
+		try {
+			String line = reader.readLine();
+			if (line != null) {
+				parseLine(line);
+				label.setText("Parsed line: \n" + line);
+			} else {
+				label.setText("Drawing Complete");
+			}
+		} catch (IOException e) {
+			label.setText("IO Exception");
+		} catch (ParseException e) {
+			label.setText("Parse Exception");
+		}
 	}
 
 	private void parseLine(String line) throws ParseException {
@@ -224,6 +242,11 @@ public class JavaFxParser {
 		} else {
 			throw new ParseException("Missing String value");
 		}
+	}
+
+	@Override
+	public void handle(ActionEvent arg0) {
+		singleStepParse();
 	}
 
 }
