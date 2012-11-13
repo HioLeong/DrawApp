@@ -7,6 +7,7 @@ import javafx.scene.shape.Arc;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 
 public class ImagePanel extends Pane {
 
@@ -45,6 +46,13 @@ public class ImagePanel extends Pane {
 		oval.setFill(null);
 		oval.setStroke(Color.BLACK);
 		root.getChildren().add(oval);
+	}
+	
+	public void drawString(double centerX, double centerY, String s) {
+		Text text = new Text(centerX, centerY, s);
+		text.setFill(Color.BLACK);
+		text.setStroke(Color.BLACK);
+		root.getChildren().add(text);
 	}
 
 }

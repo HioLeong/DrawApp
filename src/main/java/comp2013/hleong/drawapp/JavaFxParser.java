@@ -50,6 +50,9 @@ public class JavaFxParser {
 		if (command.equals("DO")) {
 			drawOval(line.substring(2, line.length()));
 		}
+		if (command.equals("DS")) {
+			drawString(line.substring(2, line.length()));
+		}
 
 	}
 
@@ -105,7 +108,7 @@ public class JavaFxParser {
 	}
 
 	public void drawOval(String args) throws ParseException {
-		
+
 		int centerX = 0;
 		int centerY = 0;
 		int radiusX = 0;
@@ -116,12 +119,20 @@ public class JavaFxParser {
 		centerY = getInteger(tokenizer);
 		radiusX = getInteger(tokenizer);
 		radiusY = getInteger(tokenizer);
-		
+
 		imagePanel.drawOval(centerX, centerY, radiusX, radiusY);
 	}
 
 	public void drawString(String args) throws ParseException {
-		// TODO Auto-generated method stub
+		int x = 0;
+		int y = 0;
+		String s = "";
+		StringTokenizer tokenizer = new StringTokenizer(args);
+		x = getInteger(tokenizer);
+		y = getInteger(tokenizer);
+		s = s.concat(getString(tokenizer));
+		
+		imagePanel.drawString(x, y, s);
 
 	}
 
@@ -136,6 +147,18 @@ public class JavaFxParser {
 		} else {
 			label.setText("Missing Integer value");
 			throw new ParseException("Missing Integer value");
+		}
+	}
+	
+	public String getString(StringTokenizer tokenizer) throws ParseException {
+		String s = "";
+		if (tokenizer.hasMoreElements()) {
+			while (tokenizer.hasMoreElements()) {
+				s = s.concat(" " + tokenizer.nextToken());
+			}
+			return s;
+		} else {
+			throw new ParseException("Missing String value");
 		}
 	}
 
