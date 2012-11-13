@@ -40,6 +40,7 @@ public class ImagePanel extends Pane {
 	public void fillRect(double x1, double y1, double x2, double y2) {
 		Rectangle rect = new Rectangle(x1, y1, x2, y2);
 		rect.setFill(currentColor);
+		rect.setStroke(currentColor);
 		root.getChildren().add(rect);
 	}
 

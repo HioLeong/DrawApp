@@ -46,7 +46,7 @@ public class JavaFxParser {
 			drawRect(line.substring(2, line.length()));
 		}
 		if (command.equals("FR")) {
-
+			fillRect(line.substring(2, line.length()));
 		}
 		if (command.equals("DA")) {
 			drawArc(line.substring(2, line.length()));
@@ -106,7 +106,7 @@ public class JavaFxParser {
 		x2 = getInteger(tokenizer);
 		y2 = getInteger(tokenizer);
 
-		imagePanel.drawRect(x1, y1, x2, y2);
+		imagePanel.fillRect(x1, y1, x2, y2);
 	}
 
 	public void drawArc(String args) throws ParseException {

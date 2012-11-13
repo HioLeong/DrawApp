@@ -1,7 +1,7 @@
 package comp2013.hleong.drawapp;
 
 import javafx.application.Platform;
-import javafx.event.Event;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -32,11 +32,13 @@ public class MainWindow extends VBox {
 		buttonBox = new HBox();
 		buttonBox.getChildren().add(
 				ButtonBuilder.create().text("Close")
-						.onAction(new EventHandler() {
+						.onAction(new EventHandler<ActionEvent>() {
 
 							@Override
-							public void handle(Event arg0) {
+							public void handle(ActionEvent arg0) {
+								// TODO Auto-generated method stub
 								Platform.exit();
+
 							}
 
 						}).build());
