@@ -18,10 +18,9 @@ public class ImagePanel extends Pane {
 
 	public ImagePanel(double height, double width) {
 		currentColor = DEFAULT_COLOR;
-		this.setPrefSize(height, width);
-		this.setHeight(height);
-		this.setWidth(width);
-		this.getChildren().add(root);
+		setPrefSize(height, width);
+		setMaxSize(height, width);
+		getChildren().add(root);
 	}
 
 	public void drawLine(double x1, double y1, double x2, double y2) {

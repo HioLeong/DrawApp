@@ -5,12 +5,10 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.StringTokenizer;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 
-public class JavaFxParser implements EventHandler<ActionEvent> {
+public class JavaFxParser  {
 
 	private BufferedReader reader;
 	private ImagePanel imagePanel;
@@ -23,9 +21,13 @@ public class JavaFxParser implements EventHandler<ActionEvent> {
 	}
 
 	public void parse() {
+		
+		String currentLine = "";
+		
 		try {
 			String line = reader.readLine();
 			while (line != null) {
+				currentLine = line;
 				parseLine(line);
 				line = reader.readLine();
 			}
@@ -33,13 +35,15 @@ public class JavaFxParser implements EventHandler<ActionEvent> {
 		} catch (IOException e) {
 			label.setText("IO Exception");
 		} catch (ParseException e) {
-			label.setText("Parse Exception");
+			label.setText("Parse Exception: \n" + currentLine);
 		}
 	}
 
 	public void singleStepParse() {
+		String parsedLine = "" ;
 		try {
 			String line = reader.readLine();
+			parsedLine = line;
 			if (line != null) {
 				parseLine(line);
 				label.setText("Parsed line: \n" + line);
@@ -49,7 +53,8 @@ public class JavaFxParser implements EventHandler<ActionEvent> {
 		} catch (IOException e) {
 			label.setText("IO Exception");
 		} catch (ParseException e) {
-			label.setText("Parse Exception");
+
+			label.setText("Parse Exception: \n" + parsedLine);
 		}
 	}
 
@@ -242,11 +247,6 @@ public class JavaFxParser implements EventHandler<ActionEvent> {
 		} else {
 			throw new ParseException("Missing String value");
 		}
-	}
-
-	@Override
-	public void handle(ActionEvent arg0) {
-		singleStepParse();
 	}
 
 }

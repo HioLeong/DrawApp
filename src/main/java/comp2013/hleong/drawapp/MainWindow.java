@@ -8,6 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBuilder;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -20,6 +21,7 @@ public class MainWindow extends VBox {
 	private Label label;
 	private HBox buttonBox;
 	private Button nextStep;
+	private Button complete;
 
 	public MainWindow() {
 		this(DEFAULT_WIDTH, DEFAULT_HEIGHT);
@@ -28,7 +30,10 @@ public class MainWindow extends VBox {
 	public MainWindow(double width, double height) {
 		imagePanel = new ImagePanel(width, height);
 
+		ScrollPane sp = new ScrollPane();
+		sp.setPrefSize(width/2, height/2);
 		label = new Label();
+		sp.setContent(label);
 		label.setPrefSize(width, height / 2);
 
 		buttonBox = new HBox();
@@ -47,6 +52,10 @@ public class MainWindow extends VBox {
 		nextStep = new Button();
 		nextStep.setText("Next Step");
 		
+		complete = new Button();
+		complete.setText("Complete");
+		
+		buttonBox.getChildren().add(complete);
 		buttonBox.getChildren().add(nextStep);
 		buttonBox.setPadding(new Insets(10, 10, 10, 10));
 		buildGUI();
@@ -57,15 +66,13 @@ public class MainWindow extends VBox {
 	 */
 	private void buildGUI() {
 
-		imagePanel.setStyle("-fx-border-color: grey;");
 		getChildren().add(imagePanel);
 
-		label.setStyle("-fx-padding: 10px");
+		label.setStyle("-fx-padding: 10px; -fx-border-color: grey; -fx-background-color: white;");
 		label.setAlignment(Pos.TOP_LEFT);
 		getChildren().add(label);
 
 		buttonBox.setAlignment(Pos.CENTER);
-		buttonBox.setStyle("-fx-border-color: grey");
 		getChildren().add(buttonBox);
 
 	}
@@ -80,6 +87,10 @@ public class MainWindow extends VBox {
 	
 	public Button getNextStepButton() {
 		return nextStep;
+	}
+	
+	public Button getCompleteButton() {
+		return complete;
 	}
 
 }

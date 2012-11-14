@@ -1,33 +1,59 @@
 package comp2013.hleong.drawapp;
 
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class DrawApp extends Application {
 
-	public final static String TEST_PARSE = "SC blue\nFR 0 0 150 150\nSC black\nFR 150 150 150 150\nDL 0";
+	public final static String TEST_PARSE = "SC blue\nFR 0 0 540 350\nSC black\nFR 150 150 150 150\nDL 0";
+	private final static boolean TEST = true;
 
 	private void init(Stage primaryStage) {
 		Group root = new Group();
-		primaryStage.setResizable(false);
+		primaryStage.setResizable(true);
 		primaryStage.setScene(new Scene(root));
 
 		MainWindow mainWindow = new MainWindow();
 		root.getChildren().add(mainWindow);
-//		Reader reader = new InputStreamReader(System.in);
-		Reader reader = new StringReader(TEST_PARSE);
-		JavaFxParser parser = new JavaFxParser(reader, mainWindow.getLabel(),
-				mainWindow.getImagePanel());
 		
-		mainWindow.getNextStepButton().setOnAction(parser);
-//		parser.parse();
+		Reader reader;
 		
+		if (TEST) {
+			reader = new StringReader(TEST_PARSE);
+		} else {
+			reader = new InputStreamReader(System.in);
+		}
 		
+		final JavaFxParser parser = new JavaFxParser(reader,
+				mainWindow.getLabel(), mainWindow.getImagePanel());
+
+		mainWindow.getNextStepButton().setOnAction(
+				new EventHandler<ActionEvent>() {
+
+					@Override
+					public void handle(ActionEvent arg0) {
+						parser.singleStepParse();
+					}
+
+				});
+
+		mainWindow.getCompleteButton().setOnAction(
+				new EventHandler<ActionEvent>() {
+
+					@Override
+					public void handle(ActionEvent arg0) {
+						parser.parse();
+					}
+
+				});
 
 	}
 
