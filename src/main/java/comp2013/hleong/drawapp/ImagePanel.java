@@ -3,7 +3,6 @@ package comp2013.hleong.drawapp;
 import java.io.File;
 
 import javafx.scene.Group;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -71,13 +70,18 @@ public class ImagePanel extends Pane {
 		root.getChildren().add(text);
 	}
 
-	public void drawImage(double width, double height, String fileName) {
+	public void drawImage(double x, double y, double width, double height,
+			String fileName) {
 
 		File file = new File(fileName);
-		
+
 		ImageView image = new ImageView(file.toURI().toString());
-		image.setFitHeight(height);
+		
+		image.setX(x);
+		image.setY(y);
+		
 		image.setFitWidth(width);
+		image.setFitHeight(height);
 		root.getChildren().add(image);
 
 	}

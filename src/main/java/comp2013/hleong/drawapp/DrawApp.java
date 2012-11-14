@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 public class DrawApp extends Application {
 
-	public final static String TEST_PARSE = "DI 100 100 C:/output.png";
+	public final static String TEST_PARSE = "DI 150 150 30 100 C:/output.png";
 	private final static boolean TEST = true;
 
 	private void init(Stage primaryStage) {

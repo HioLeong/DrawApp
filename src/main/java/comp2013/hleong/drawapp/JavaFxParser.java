@@ -189,16 +189,22 @@ public class JavaFxParser {
 
 	public void drawImage(String args) throws ParseException {
 
-		int height = 0;
+		int x = 0;
+		int y = 0;
 		int width = 0;
+		int height = 0;
 		String file = "";
 
 		StringTokenizer tokenizer = new StringTokenizer(args);
-		height = getInteger(tokenizer);
+		
+		// Order matters
+		x = getInteger(tokenizer);
+		y = getInteger(tokenizer);
 		width = getInteger(tokenizer);
+		height = getInteger(tokenizer);
 		file = getString(tokenizer);
 
-		imagePanel.drawImage(width, height, file);
+		imagePanel.drawImage(x, y, width, height, file);
 	}
 
 	public void setColour(String colourName) throws ParseException {
@@ -245,6 +251,8 @@ public class JavaFxParser {
 		// throw new ParseException("Invalid colour name");
 
 	}
+	
+	
 
 	public int getInteger(StringTokenizer tokenizer) throws ParseException {
 		if (tokenizer.hasMoreElements()) {
