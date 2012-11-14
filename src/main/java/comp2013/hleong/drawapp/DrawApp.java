@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 public class DrawApp extends Application {
 
-	public final static String TEST_PARSE = "SC blue\nFR 0 0 540 350\nSC black\nFR 150 150 150 150\nDL 0";
+	public final static String TEST_PARSE = "DI 100 100 C:/output.png";
 	private final static boolean TEST = true;
 
 	private void init(Stage primaryStage) {

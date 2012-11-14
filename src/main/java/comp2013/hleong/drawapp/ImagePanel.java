@@ -1,6 +1,10 @@
 package comp2013.hleong.drawapp;
 
+import java.io.File;
+
 import javafx.scene.Group;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Arc;
@@ -35,7 +39,7 @@ public class ImagePanel extends Pane {
 		rect.setStroke(currentColor);
 		root.getChildren().add(rect);
 	}
-	
+
 	public void fillRect(double x1, double y1, double x2, double y2) {
 		Rectangle rect = new Rectangle(x1, y1, x2, y2);
 		rect.setFill(currentColor);
@@ -65,6 +69,17 @@ public class ImagePanel extends Pane {
 		text.setFill(currentColor);
 		text.setStroke(currentColor);
 		root.getChildren().add(text);
+	}
+
+	public void drawImage(double width, double height, String fileName) {
+
+		File file = new File(fileName);
+		
+		ImageView image = new ImageView(file.toURI().toString());
+		image.setFitHeight(height);
+		image.setFitWidth(width);
+		root.getChildren().add(image);
+
 	}
 
 	public void setColor(Color color) {

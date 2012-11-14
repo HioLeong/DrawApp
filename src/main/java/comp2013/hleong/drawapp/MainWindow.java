@@ -73,6 +73,7 @@ public class MainWindow extends VBox {
 		getChildren().add(label);
 
 		buttonBox.setAlignment(Pos.CENTER);
+		buttonBox.setStyle("-fx-background-color: white;");
 		getChildren().add(buttonBox);
 
 	}

@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 
-public class JavaFxParser  {
+public class JavaFxParser {
 
 	private BufferedReader reader;
 	private ImagePanel imagePanel;
@@ -21,9 +21,9 @@ public class JavaFxParser  {
 	}
 
 	public void parse() {
-		
+
 		String currentLine = "";
-		
+
 		try {
 			String line = reader.readLine();
 			while (line != null) {
@@ -40,7 +40,7 @@ public class JavaFxParser  {
 	}
 
 	public void singleStepParse() {
-		String parsedLine = "" ;
+		String parsedLine = "";
 		try {
 			String line = reader.readLine();
 			parsedLine = line;
@@ -82,6 +82,10 @@ public class JavaFxParser  {
 		}
 		if (command.equals("SC")) {
 			setColour(line.substring(3, line.length()));
+		}
+		if (command.equals("DI")) {
+			// TODO: Test
+			drawImage(line.substring(2, line.length()));
 		}
 
 	}
@@ -183,6 +187,20 @@ public class JavaFxParser  {
 
 	}
 
+	public void drawImage(String args) throws ParseException {
+
+		int height = 0;
+		int width = 0;
+		String file = "";
+
+		StringTokenizer tokenizer = new StringTokenizer(args);
+		height = getInteger(tokenizer);
+		width = getInteger(tokenizer);
+		file = getString(tokenizer);
+
+		imagePanel.drawImage(width, height, file);
+	}
+
 	public void setColour(String colourName) throws ParseException {
 
 		if (colourName.equals("black")) {
@@ -241,7 +259,7 @@ public class JavaFxParser  {
 		String s = "";
 		if (tokenizer.hasMoreElements()) {
 			while (tokenizer.hasMoreElements()) {
-				s = s.concat(" " + tokenizer.nextToken());
+				s = s.concat(tokenizer.nextToken());
 			}
 			return s;
 		} else {
