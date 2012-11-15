@@ -116,4 +116,8 @@ public class ImagePanel extends Pane {
 		currentColor = gradient;
 	}
 
+	public void setDimension(double width, double height) {
+		setPrefSize(width, height);
+	}
+
 }

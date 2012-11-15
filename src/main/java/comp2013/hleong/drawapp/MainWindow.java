@@ -22,6 +22,7 @@ public class MainWindow extends VBox {
 	private HBox buttonBox;
 	private Button nextStep;
 	private Button complete;
+	private Button snapshot;
 
 	public MainWindow() {
 		this(DEFAULT_WIDTH, DEFAULT_HEIGHT);
@@ -31,13 +32,13 @@ public class MainWindow extends VBox {
 		imagePanel = new ImagePanel(width, height);
 
 		ScrollPane sp = new ScrollPane();
-		sp.setPrefSize(width/2, height/2);
+		sp.setPrefSize(width / 2, height / 2);
 		label = new Label();
 		sp.setContent(label);
 		label.setPrefSize(width, height / 2);
 
 		buttonBox = new HBox();
-		
+
 		buttonBox.getChildren().add(
 				ButtonBuilder.create().text("Close")
 						.onAction(new EventHandler<ActionEvent>() {
@@ -48,13 +49,15 @@ public class MainWindow extends VBox {
 							}
 
 						}).build());
-		
+
 		nextStep = new Button();
 		nextStep.setText("Next Step");
-		
+
 		complete = new Button();
 		complete.setText("Complete");
 		
+		snapshot = new Button();
+		snapshot.setText("");
 		buttonBox.getChildren().add(complete);
 		buttonBox.getChildren().add(nextStep);
 		buttonBox.setPadding(new Insets(10, 10, 10, 10));
@@ -85,13 +88,18 @@ public class MainWindow extends VBox {
 	public Label getLabel() {
 		return label;
 	}
-	
+
 	public Button getNextStepButton() {
 		return nextStep;
 	}
-	
+
 	public Button getCompleteButton() {
 		return complete;
+	}
+
+	public void setDimension(double width, double height) {
+		imagePanel.setDimension(width, height);
+		label.setPrefSize(width, height / 2);
 	}
 
 }

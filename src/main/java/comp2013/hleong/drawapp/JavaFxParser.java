@@ -9,17 +9,23 @@ import java.util.StringTokenizer;
 
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 public class JavaFxParser {
 
 	private BufferedReader reader;
 	private ImagePanel imagePanel;
 	private Label label;
+	private MainWindow mainWindow;
+	private Stage primaryStage;
 
-	public JavaFxParser(Reader reader, Label label, ImagePanel imagePanel) {
+	public JavaFxParser(Reader reader, 
+			MainWindow mainWindow, Stage primaryStage) {
+		this.mainWindow = mainWindow;
 		this.reader = new BufferedReader(reader);
-		this.imagePanel = imagePanel;
-		this.label = label;
+		this.imagePanel = mainWindow.getImagePanel();
+		this.label = mainWindow.getLabel();
+		this.primaryStage = primaryStage;
 	}
 
 	public void parse() {
@@ -89,9 +95,28 @@ public class JavaFxParser {
 			drawImage(line.substring(2, line.length()));
 		}
 		if (command.equals("SG")) {
-			setGradient(line.substring(2,line.length()));
+			setGradient(line.substring(2, line.length()));
+		}
+		if (command.equals("SD")) {
+			setDimension(line.substring(2, line.length()));
 		}
 
+	}
+
+	public void setDimension(String args) throws ParseException {
+
+		StringTokenizer tokenizer = new StringTokenizer(args);
+
+		int x = 0;
+		int y = 0;
+
+		x = getInteger(tokenizer);
+		y = getInteger(tokenizer);
+
+		mainWindow.setDimension(x, y);
+		primaryStage.setHeight(y*1.3);
+		primaryStage.setWidth(x);
+		
 	}
 
 	public void drawLine(String args) throws ParseException {
@@ -212,19 +237,20 @@ public class JavaFxParser {
 
 	public void setColour(String colourName) throws ParseException {
 
-		imagePanel.setColor(getColor(colourName)); return;
-		
+		imagePanel.setColor(getColor(colourName));
+		return;
+
 	}
 
 	public void setGradient(String args) throws ParseException {
-		
+
 		StringTokenizer tokenizer = new StringTokenizer(args);
-		
+
 		List<Color> colours = new ArrayList<Color>();
 		while (tokenizer.hasMoreElements()) {
 			colours.add(getColor(getString(tokenizer)));
 		}
-		
+
 		imagePanel.setGradient(colours);
 	}
 
@@ -300,7 +326,7 @@ public class JavaFxParser {
 		if (colourName.equals("yellow")) {
 			return Color.YELLOW;
 		}
-		
+
 		throw new ParseException("Invalid colour name");
 	}
 }
