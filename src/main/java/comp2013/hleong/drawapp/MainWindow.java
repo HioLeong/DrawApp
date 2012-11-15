@@ -50,16 +50,14 @@ public class MainWindow extends VBox {
 
 						}).build());
 
-		nextStep = new Button();
-		nextStep.setText("Next Step");
-
-		complete = new Button();
-		complete.setText("Complete");
+		nextStep = new Button("Next Step");
+		complete = new Button("Complete");
+		snapshot = new Button("Save Image");
 		
-		snapshot = new Button();
-		snapshot.setText("");
+		buttonBox.getChildren().add(snapshot);
 		buttonBox.getChildren().add(complete);
 		buttonBox.getChildren().add(nextStep);
+		
 		buttonBox.setPadding(new Insets(10, 10, 10, 10));
 		buildGUI();
 	}
@@ -95,6 +93,10 @@ public class MainWindow extends VBox {
 
 	public Button getCompleteButton() {
 		return complete;
+	}
+	
+	public Button getSnapshotButton() {
+		return snapshot;
 	}
 
 	public void setDimension(double width, double height) {
