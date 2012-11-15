@@ -3,6 +3,8 @@ package comp2013.hleong.drawapp;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 import javafx.scene.control.Label;
@@ -84,8 +86,10 @@ public class JavaFxParser {
 			setColour(line.substring(3, line.length()));
 		}
 		if (command.equals("DI")) {
-			// TODO: Test
 			drawImage(line.substring(2, line.length()));
+		}
+		if (command.equals("SG")) {
+			setGradient(line.substring(2,line.length()));
 		}
 
 	}
@@ -181,7 +185,7 @@ public class JavaFxParser {
 		StringTokenizer tokenizer = new StringTokenizer(args);
 		x = getInteger(tokenizer);
 		y = getInteger(tokenizer);
-		s = s.concat(getString(tokenizer));
+		s = s.concat(getStrings(tokenizer));
 
 		imagePanel.drawString(x, y, s);
 
@@ -193,66 +197,36 @@ public class JavaFxParser {
 		int y = 0;
 		int width = 0;
 		int height = 0;
-		String file = "";
+		String fileName = "";
 
 		StringTokenizer tokenizer = new StringTokenizer(args);
-		
-		// Order matters
+
 		x = getInteger(tokenizer);
 		y = getInteger(tokenizer);
 		width = getInteger(tokenizer);
 		height = getInteger(tokenizer);
-		file = getString(tokenizer);
+		fileName = getString(tokenizer);
 
-		imagePanel.drawImage(x, y, width, height, file);
+		imagePanel.drawImage(x, y, width, height, fileName);
 	}
 
 	public void setColour(String colourName) throws ParseException {
 
-		if (colourName.equals("black")) {
-			imagePanel.setColor(Color.BLACK);
-		}
-		if (colourName.equals("blue")) {
-			imagePanel.setColor(Color.BLUE);
-		}
-		if (colourName.equals("cyan")) {
-			imagePanel.setColor(Color.CYAN);
-		}
-		if (colourName.equals("darkgrey")) {
-			imagePanel.setColor(Color.DARKGREY);
-		}
-		if (colourName.equals("grey")) {
-			imagePanel.setColor(Color.GREY);
-		}
-		if (colourName.equals("green")) {
-			imagePanel.setColor(Color.GREEN);
-		}
-		if (colourName.equals("lightgray")) {
-			imagePanel.setColor(Color.LIGHTGREY);
-		}
-		if (colourName.equals("magenta")) {
-			imagePanel.setColor(Color.MAGENTA);
-		}
-		if (colourName.equals("orange")) {
-			imagePanel.setColor(Color.ORANGE);
-		}
-		if (colourName.equals("pink")) {
-			imagePanel.setColor(Color.PINK);
-		}
-		if (colourName.equals("red")) {
-			imagePanel.setColor(Color.RED);
-		}
-		if (colourName.equals("white")) {
-			imagePanel.setColor(Color.WHITE);
-		}
-		if (colourName.equals("yellow")) {
-			imagePanel.setColor(Color.YELLOW);
-		}
-		// throw new ParseException("Invalid colour name");
-
+		imagePanel.setColor(getColor(colourName)); return;
+		
 	}
-	
-	
+
+	public void setGradient(String args) throws ParseException {
+		
+		StringTokenizer tokenizer = new StringTokenizer(args);
+		
+		List<Color> colours = new ArrayList<Color>();
+		while (tokenizer.hasMoreElements()) {
+			colours.add(getColor(getString(tokenizer)));
+		}
+		
+		imagePanel.setGradient(colours);
+	}
 
 	public int getInteger(StringTokenizer tokenizer) throws ParseException {
 		if (tokenizer.hasMoreElements()) {
@@ -266,8 +240,18 @@ public class JavaFxParser {
 	public String getString(StringTokenizer tokenizer) throws ParseException {
 		String s = "";
 		if (tokenizer.hasMoreElements()) {
+			s = tokenizer.nextToken();
+			return s;
+		} else {
+			throw new ParseException("Missing String value");
+		}
+	}
+
+	public String getStrings(StringTokenizer tokenizer) throws ParseException {
+		String s = "";
+		if (tokenizer.hasMoreElements()) {
 			while (tokenizer.hasMoreElements()) {
-				s = s.concat(tokenizer.nextToken());
+				s = s.concat(" " + getString(tokenizer));
 			}
 			return s;
 		} else {
@@ -275,4 +259,48 @@ public class JavaFxParser {
 		}
 	}
 
+	public Color getColor(String colourName) throws ParseException {
+
+		if (colourName.equals("black")) {
+			return Color.BLACK;
+		}
+		if (colourName.equals("blue")) {
+			return Color.BLUE;
+		}
+		if (colourName.equals("cyan")) {
+			return Color.CYAN;
+		}
+		if (colourName.equals("darkgrey")) {
+			return Color.DARKGREY;
+		}
+		if (colourName.equals("grey")) {
+			return Color.GREY;
+		}
+		if (colourName.equals("green")) {
+			return Color.GREEN;
+		}
+		if (colourName.equals("lightgrey")) {
+			return Color.LIGHTGREY;
+		}
+		if (colourName.equals("magenta")) {
+			return Color.MAGENTA;
+		}
+		if (colourName.equals("orange")) {
+			return Color.ORANGE;
+		}
+		if (colourName.equals("pink")) {
+			return Color.PINK;
+		}
+		if (colourName.equals("red")) {
+			return Color.RED;
+		}
+		if (colourName.equals("white")) {
+			return Color.WHITE;
+		}
+		if (colourName.equals("yellow")) {
+			return Color.YELLOW;
+		}
+		
+		throw new ParseException("Invalid colour name");
+	}
 }
