@@ -1,5 +1,7 @@
 package comp2013.hleong.drawapp;
 
+import javafx.scene.control.Label;
+
 public class ParseException extends Exception
 {
   public ParseException()
@@ -11,4 +13,10 @@ public class ParseException extends Exception
   {
     super(message);
   }
+  
+  public ParseException(Label label, String message) {
+	  super(message);
+	  label.setText(message);
+  }
+  
 }

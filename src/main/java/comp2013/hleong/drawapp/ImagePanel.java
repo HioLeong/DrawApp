@@ -14,6 +14,7 @@ import javafx.scene.paint.Stop;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
@@ -118,6 +119,22 @@ public class ImagePanel extends Pane {
 
 	public void setDimension(double width, double height) {
 		setPrefSize(width, height);
+	}
+
+	public void drawPolygon(double[] coordinates) {
+		
+		Polygon polygon = new Polygon(coordinates);
+		polygon.setFill(null);
+		polygon.setStroke(currentColor);
+		root.getChildren().add(polygon);
+		
+	}
+
+	public void fillPolygon(double[] coordinates) {
+		Polygon polygon = new Polygon(coordinates);
+		polygon.setFill(currentColor);
+		polygon.setStroke(null);
+		root.getChildren().add(polygon);
 	}
 
 }

@@ -19,8 +19,7 @@ public class JavaFxParser {
 	private MainWindow mainWindow;
 	private Stage primaryStage;
 
-	public JavaFxParser(Reader reader, 
-			MainWindow mainWindow, Stage primaryStage) {
+	public JavaFxParser(Reader reader, MainWindow mainWindow, Stage primaryStage) {
 		this.mainWindow = mainWindow;
 		this.reader = new BufferedReader(reader);
 		this.imagePanel = mainWindow.getImagePanel();
@@ -100,7 +99,25 @@ public class JavaFxParser {
 		if (command.equals("SD")) {
 			setDimension(line.substring(2, line.length()));
 		}
+		if (command.equals("DG")) {
+			drawPolygon(line.substring(2, line.length()));
+		}
+		if (command.equals("FG")) {
+			fillPolygon(line.substring(2, line.length()));
+		}
 
+	}
+
+	public void drawPolygon(String args) throws ParseException {
+
+		StringTokenizer tokenizer = new StringTokenizer(args);
+		imagePanel.drawPolygon(getCoordinates(tokenizer));
+
+	}
+
+	public void fillPolygon(String args) throws ParseException {
+		StringTokenizer tokenizer = new StringTokenizer(args);
+		imagePanel.fillPolygon(getCoordinates(tokenizer));
 	}
 
 	public void setDimension(String args) throws ParseException {
@@ -114,9 +131,9 @@ public class JavaFxParser {
 		y = getInteger(tokenizer);
 
 		mainWindow.setDimension(x, y);
-		primaryStage.setHeight(y*1.3);
+		primaryStage.setHeight(y * 1.3);
 		primaryStage.setWidth(x);
-		
+
 	}
 
 	public void drawLine(String args) throws ParseException {
@@ -328,5 +345,28 @@ public class JavaFxParser {
 		}
 
 		throw new ParseException("Invalid colour name");
+	}
+
+	public double[] getCoordinates(StringTokenizer tokenizer)
+			throws ParseException {
+		List<Double> coordinates = new ArrayList<Double>();
+		while (tokenizer.hasMoreElements()) {
+			coordinates.add((double) getInteger(tokenizer));
+		}
+
+		// Throw exception if missing coordinate.
+
+		if (coordinates.size() % 2 == 0) {
+			double[] coordArray = new double[coordinates.size()];
+
+			for (int i = 0; i < coordinates.size(); i++) {
+				coordArray[i] = coordinates.get(i).doubleValue();
+
+			}
+			return coordArray;
+
+		} else {
+			throw new ParseException();
+		}
 	}
 }
