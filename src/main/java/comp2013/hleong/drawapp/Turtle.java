@@ -48,9 +48,8 @@ public class Turtle extends Group {
 		}
 		
 		turtle.setTranslateX(x);
-		turtle.setTranslateY(y);
+		turtle.setTranslateY(y); 
 		
-
 	}
 
 	public void turnLeft(double dAngle) {

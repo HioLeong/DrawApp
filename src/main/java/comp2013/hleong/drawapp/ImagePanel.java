@@ -160,7 +160,7 @@ public class ImagePanel extends Pane {
 		}
 	}
 
-	public void turtlePenDown(boolean b) {
-		turtle.setPenDown(b);
+	public void turtlePenDown(boolean down) {
+		turtle.setPenDown(down);
 	}
 }

@@ -139,15 +139,14 @@ public class JavaFxParser {
 		if (command.equals("PD")) {
 			turtlePenDown(line.substring(2, line.length()));
 		}
-		
+
 		throw new ParseException("Unknown command");
 
 	}
 
-
 	public void turtlePenDown(String args) throws ParseException {
 		StringTokenizer tokenizer = new StringTokenizer(args);
-		
+
 		if (getInteger(tokenizer) == 1) {
 			imagePanel.turtlePenDown(true);
 		} else {
@@ -156,10 +155,10 @@ public class JavaFxParser {
 	}
 
 	public void turtleForward(String args) throws ParseException {
-		
+
 		StringTokenizer tokenizer = new StringTokenizer(args);
 		imagePanel.turtleForward(getInteger(tokenizer));
-		
+
 	}
 
 	public void turtleTurnRight(String args) throws ParseException {
@@ -171,7 +170,7 @@ public class JavaFxParser {
 
 		StringTokenizer tokenizer = new StringTokenizer(args);
 		imagePanel.turtleTurnLeft(getInteger(tokenizer));
-		
+
 	}
 
 	public void turtleMode(String args) throws ParseException {
