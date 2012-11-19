@@ -60,7 +60,6 @@ public class JavaFxParser {
 		} catch (IOException e) {
 			label.setText("IO Exception");
 		} catch (ParseException e) {
-
 			label.setText("Parse Exception: \n" + parsedLine);
 		}
 	}
@@ -69,43 +68,95 @@ public class JavaFxParser {
 		if (line.length() < 2)
 			return;
 		String command = line.substring(0, 2);
+
+		// Graphic Commands
 		if (command.equals("DL")) {
 			drawLine(line.substring(2, line.length()));
+			return;
 		}
 		if (command.equals("DR")) {
 			drawRect(line.substring(2, line.length()));
+			return;
 		}
 		if (command.equals("FR")) {
 			fillRect(line.substring(2, line.length()));
+			return;
 		}
 		if (command.equals("DA")) {
 			drawArc(line.substring(2, line.length()));
+			return;
 		}
 		if (command.equals("DO")) {
 			drawOval(line.substring(2, line.length()));
+			return;
 		}
 		if (command.equals("DS")) {
 			drawString(line.substring(2, line.length()));
+			return;
 		}
 		if (command.equals("SC")) {
 			setColour(line.substring(3, line.length()));
+			return;
 		}
 		if (command.equals("DI")) {
 			drawImage(line.substring(2, line.length()));
+			return;
 		}
 		if (command.equals("SG")) {
 			setGradient(line.substring(2, line.length()));
+			return;
 		}
 		if (command.equals("SD")) {
 			setDimension(line.substring(2, line.length()));
+			return;
 		}
 		if (command.equals("DG")) {
 			drawPolygon(line.substring(2, line.length()));
+			return;
 		}
 		if (command.equals("FG")) {
 			fillPolygon(line.substring(2, line.length()));
+			return;
 		}
 
+		// Turtle Commands
+		if (command.equals("TM")) {
+			turtleMode(line.substring(2, line.length()));
+			return;
+		}
+		if (command.equals("TL")) {
+			turtleTurnLeft(line.substring(2, line.length()));
+			return;
+		}
+		if (command.equals("TF")) {
+			turtleForward(line.substring(2, line.length()));
+			return;
+		}
+		throw new ParseException("Unknown command");
+
+	}
+
+	public void turtleForward(String args) throws ParseException {
+		
+		StringTokenizer tokenizer = new StringTokenizer(args);
+		imagePanel.turtleForward(getInteger(tokenizer));
+		
+	}
+
+	public void turtleTurnLeft(String args) throws ParseException {
+
+		StringTokenizer tokenizer = new StringTokenizer(args);
+		imagePanel.turtleTurnLeft(getInteger(tokenizer));
+		
+	}
+
+	public void turtleMode(String args) throws ParseException {
+		StringTokenizer tokenizer = new StringTokenizer(args);
+		if (getInteger(tokenizer) == 1) {
+			imagePanel.turtleMode(true);
+		} else {
+			imagePanel.turtleMode(false);
+		}
 	}
 
 	public void drawPolygon(String args) throws ParseException {

@@ -21,7 +21,7 @@ import javax.imageio.ImageIO;
 
 public class DrawApp extends Application {
 
-	public final static String TEST_PARSE  = "SC blue\nFG 10 10 150 150 150 100";
+	public final static String TEST_PARSE = "TM 1\nTL 45\nTF 100\nTL 90\nTF 100";
 	private final static boolean TEST = true;
 
 	private void init(Stage primaryStage) {
@@ -81,7 +81,13 @@ public class DrawApp extends Application {
 								SnapshotParametersBuilder.create().build(),
 								writableImage);
 						try {
-							
+
+							// TODO
+							File file = new File(".");
+							for (File f : file.listFiles()) {
+								System.out.println(f.getAbsolutePath());
+							}
+
 							ImageIO.write(
 									SwingFXUtils.fromFXImage(image, null),
 									"png", new File("screenshot.png"));
@@ -95,13 +101,14 @@ public class DrawApp extends Application {
 
 	public static void main(String[] args) {
 		launch();
-
 	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+
 		init(primaryStage);
 		primaryStage.show();
+
 	}
 
 }

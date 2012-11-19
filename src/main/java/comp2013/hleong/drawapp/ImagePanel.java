@@ -17,6 +17,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.scene.transform.Translate;
 
 public class ImagePanel extends Pane {
 
@@ -24,6 +25,7 @@ public class ImagePanel extends Pane {
 
 	private Paint currentColor;
 	private Group root = new Group();
+	private Turtle turtle;
 
 	public ImagePanel(double height, double width) {
 		currentColor = DEFAULT_COLOR;
@@ -105,9 +107,9 @@ public class ImagePanel extends Pane {
 
 		for (int i = 0; i < colours.size(); i++) {
 			if (i != 0) {
-				stops[i] = new Stop((i+1) * proportion, colours.get(i));
+				stops[i] = new Stop((i + 1) * proportion, colours.get(i));
 			} else {
-				stops[i] = new Stop(i* proportion, colours.get(i));
+				stops[i] = new Stop(i * proportion, colours.get(i));
 			}
 		}
 
@@ -122,12 +124,12 @@ public class ImagePanel extends Pane {
 	}
 
 	public void drawPolygon(double[] coordinates) {
-		
+
 		Polygon polygon = new Polygon(coordinates);
 		polygon.setFill(null);
 		polygon.setStroke(currentColor);
 		root.getChildren().add(polygon);
-		
+
 	}
 
 	public void fillPolygon(double[] coordinates) {
@@ -137,4 +139,22 @@ public class ImagePanel extends Pane {
 		root.getChildren().add(polygon);
 	}
 
+	public void turtleForward(double pixel) {
+		turtle.forward(pixel);
+	}
+
+	public void turtleTurnLeft(double angle) {
+		turtle.turnLeft(angle);
+	}
+	
+	public void turtleTurnRight(double angle) {
+		
+	}
+
+	public void turtleMode(boolean b) {
+		if (b) {
+			turtle = new Turtle(getWidth() / 2, getHeight() / 2);
+			root.getChildren().add(turtle);
+		}
+	}
 }
