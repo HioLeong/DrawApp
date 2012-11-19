@@ -12,6 +12,7 @@ public class Turtle extends Group {
 	private double x;
 	private double y;
 	private double angle;
+	private boolean penDown;
 	private Polygon turtle;
 
 	public Turtle(double x, double y) {
@@ -20,30 +21,35 @@ public class Turtle extends Group {
 		turtle.setFill(Color.BLACK);
 		getChildren().add(turtle);
 
-		turtle.getTransforms().add(new Translate(x, y));
+//		turtle.getTransforms().add(new Translate(x, y));
 
+		turtle.setTranslateX(x);
+		turtle.setTranslateY(y);
+		
 		// Set its initial coordinates and angle.
 		angle = 0;
+		setPenDown(true);
 		this.setX(x);
 		this.setY(y);
 	}
 
 	public void forward(double pixel) {
+
 		double oldx = getX();
 		double oldy = getY();
 
 		x += pixel * Math.cos(Math.toRadians(angle));
 		y += pixel * Math.sin(Math.toRadians(angle));
-		
-		System.out.println(x);
-		System.out.println(y);
 
 		// for pen up/down
-		Line l = new Line(oldx, oldy, x, y);
-		getChildren().add(l);
+		if (penDown) {
+			Line l = new Line(oldx, oldy, x, y);
+			getChildren().add(l);
+		}
 		
-		Translate t = new Translate(x , y);
-		turtle.getTransforms().add(t);
+		turtle.setTranslateX(x);
+		turtle.setTranslateY(y);
+		
 
 	}
 
@@ -57,6 +63,10 @@ public class Turtle extends Group {
 		angle += dAngle;
 		Rotate r = new Rotate(dAngle);
 		turtle.getTransforms().add(r);
+	}
+
+	public void setPenDown(boolean down) {
+		penDown = down;
 	}
 
 	public double getY() {

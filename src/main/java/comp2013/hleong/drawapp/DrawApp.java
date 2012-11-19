@@ -21,7 +21,7 @@ import javax.imageio.ImageIO;
 
 public class DrawApp extends Application {
 
-	public final static String TEST_PARSE = "TM 1\nTL 45\nTF 100\nTL 90\nTF 100";
+	public final static String TEST_PARSE = "TM 1\nTR 45\nTF 100\nTR 90\nTF 100\nTR 90\nTF 100\nTR 90\nPD 0\nTF 100";
 	private final static boolean TEST = true;
 
 	private void init(Stage primaryStage) {

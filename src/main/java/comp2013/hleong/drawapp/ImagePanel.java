@@ -146,15 +146,21 @@ public class ImagePanel extends Pane {
 	public void turtleTurnLeft(double angle) {
 		turtle.turnLeft(angle);
 	}
-	
+
 	public void turtleTurnRight(double angle) {
-		
+		turtle.turnRight(angle);
 	}
 
 	public void turtleMode(boolean b) {
 		if (b) {
 			turtle = new Turtle(getWidth() / 2, getHeight() / 2);
 			root.getChildren().add(turtle);
+		} else {
+
 		}
+	}
+
+	public void turtlePenDown(boolean b) {
+		turtle.setPenDown(b);
 	}
 }
